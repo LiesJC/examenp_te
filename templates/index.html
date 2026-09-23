@@ -1,4 +1,22 @@
-<h1>Portal Académico</h1>
-<form action="{{ url_for('login') }}" method="POST">
-    <button type="submit">Ir a Iniciar Sesión</button>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if cerrado %}
+        <p style="color: blue; font-weight: bold;">La sesión fue cerrada correctamente.</p>
+    {% endif %}
+
+    {% if cookie_usuario %}
+        <h2>Bienvenido nuevamente, {{ cookie_usuario }}.</h2>
+        <p><a href="{{ url_for('eliminar_cookie') }}">Eliminar mi nombre de este equipo</a></p>
+    {% else %}
+        <h2>Bienvenido al Portal Académico.</h2>
+    {% endif %}
+
+    <br>
+    <nav>
+        <a href="{{ url_for('login') }}">Iniciar Sesión</a> | 
+        <a href="{{ url_for('cursos') }}">Ver Cursos</a> | 
+    </nav>
+
+{% endblock %}
