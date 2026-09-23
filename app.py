@@ -27,10 +27,16 @@ def login():
             
     return render_template('login.html')
 
+
 @app.route('/cursos')
 def cursos():
     u = session.get('usuario')
-    return render_template('cursos.html', usuario=u)
+    lista_cursos = [
+        {"nombre": "Programación Web", "docente": "Luis Pérez", "cupos": 15},
+        {"nombre": "Bases de Datos", "docente": "Ana López", "cupos": 8},
+        {"nombre": "Inteligencia Artificial", "docente": "Carlos Rojas", "cupos": 0}
+    ]
+    return render_template('cursos.html', usuario=u, cursos=lista_cursos)
 
 @app.route('/perfil')
 def perfil():

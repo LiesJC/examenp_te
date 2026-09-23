@@ -1,3 +1,23 @@
-{% if usuario %}
-    <h3>Bienvenido {{ usuario }}</h3>
-{% endif %}
+{% extends "base.html" %}
+{% block content %}
+    {% if usuario %}
+        <h3>Bienvenido {{ usuario }}</h3>
+    {% endif %}
+    <h2>Lista de Cursos</h2>
+    <ul>
+        {% for curso in cursos %}
+            <li>
+                <strong>{{ curso.nombre }}</strong> - {{ curso.docente }} (Cupos: {{ curso.cupos }}) 
+                - 
+                {% if curso.cupos > 0 %}
+                    Curso disponible
+                {% else %}
+                    Curso lleno
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('perfil') }}">Ver Perfil</a> | <a href="{{ url_for('logout') }}">Salir</a>
+
+{% endblock %}
